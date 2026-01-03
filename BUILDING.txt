@@ -1,0 +1,38 @@
+# Command Line Build - Quick Reference
+
+## Windows (w64devkit)
+
+```cmd
+# Build
+build.bat
+
+# Run
+run.bat
+
+# Clean
+clean.bat
+```
+
+## Linux
+
+```bash
+# Build
+./build.sh
+
+# Run  
+./run.sh
+
+# Clean
+./clean.sh
+```
+
+## First Time Setup
+
+Make sure raylib is cloned next to this directory:
+```bash
+cd ..
+git clone https://github.com/raysan5/raylib.git
+cd raylib-game-template
+```
+
+See [BUILD.md](BUILD.md) for detailed instructions.

@@ -49,7 +49,7 @@ RAYLIB_LIB_PATH       ?= $(RAYLIB_SRC_PATH)
 RAYLIB_LIBTYPE        ?= STATIC
 
 # Define compiler path on Windows
-COMPILER_PATH         ?= C:\raylib\w64devkit\bin
+COMPILER_PATH         ?= C:\w64devkit\bin
 
 # Build mode for project: DEBUG or RELEASE
 BUILD_MODE            ?= RELEASE
