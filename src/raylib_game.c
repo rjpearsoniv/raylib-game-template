@@ -80,10 +80,13 @@ int main(void)
     emscripten_set_main_loop(UpdateDrawFrame, 60, 1);
 #else
     SetTargetFPS(60);       // Set our game to run at 60 frames-per-second
+    
+    // Disable ESC key from closing window (we use it for menu navigation)
+    SetExitKey(KEY_NULL);
     //--------------------------------------------------------------------------------------
 
     // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    while (!WindowShouldClose())    // Detect window close button (NOT ESC key)
     {
         UpdateDrawFrame();
     }
