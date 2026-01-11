@@ -40,7 +40,8 @@ typedef enum GameScreen {
     DEMO_CIRCLE,
     DEMO_SQUARE,
     DEMO_SPHERE,
-    DEMO_CUBE
+    DEMO_CUBE,
+    DEMO_PONG
 } GameScreen;
 
 //----------------------------------------------------------------------------------
@@ -136,6 +137,12 @@ void UpdateCubeDemoScreen(void);
 void DrawCubeDemoScreen(void);
 void UnloadCubeDemoScreen(void);
 int FinishCubeDemoScreen(void);
+
+void InitPongScreen(void);
+void UpdatePongScreen(void);
+void DrawPongScreen(void);
+void UnloadPongScreen(void);
+int FinishPongScreen(void);
 
 #ifdef __cplusplus
 }

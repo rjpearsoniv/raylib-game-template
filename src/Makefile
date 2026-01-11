@@ -43,7 +43,8 @@ PROJECT_SOURCE_FILES  ?= \
     screen_demo_circle.c \
     screen_demo_square.c \
     screen_demo_sphere.c \
-    screen_demo_cube.c
+    screen_demo_cube.c \
+    screen_pong.cpp
 
 # raylib library variables
 RAYLIB_SRC_PATH       ?= ../../raylib/src
