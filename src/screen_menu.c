@@ -50,19 +50,26 @@ void InitMenuScreen(void)
 // Menu Screen Update logic
 void UpdateMenuScreen(void)
 {
+    // Toggle sound with S key
+    if (IsKeyPressed(KEY_S))
+    {
+        soundEnabled = !soundEnabled;
+        if (soundEnabled) PlaySound(fxCoin);
+    }
+    
     // Navigate menu with UP/DOWN arrow keys
     if (IsKeyPressed(KEY_DOWN))
     {
         selectedItem++;
         if (selectedItem >= MENU_ITEM_COUNT) selectedItem = 0;
-        PlaySound(fxCoin);
+        if (soundEnabled) PlaySound(fxCoin);
     }
     
     if (IsKeyPressed(KEY_UP))
     {
         selectedItem--;
         if (selectedItem < 0) selectedItem = MENU_ITEM_COUNT - 1;
-        PlaySound(fxCoin);
+        if (soundEnabled) PlaySound(fxCoin);
     }
     
     // Select item with ENTER or SPACE
@@ -71,7 +78,7 @@ void UpdateMenuScreen(void)
         // Return different values based on selected item
         // 1-4 map to demo screens, 5 is quit
         finishScreen = selectedItem + 1;
-        PlaySound(fxCoin);
+        if (soundEnabled) PlaySound(fxCoin);
     }
 }
 
@@ -111,7 +118,12 @@ void DrawMenuScreen(void)
     }
     
     // Draw instructions
-    DrawText("UP/DOWN: Navigate | ENTER/SPACE: Select", 50, 400, 20, DARKGRAY);
+    DrawText("UP/DOWN: Navigate | ENTER/SPACE: Select | S: Toggle Sound", 20, 380, 18, DARKGRAY);
+    
+    // Draw sound status
+    const char* soundStatus = soundEnabled ? "Sound: ON" : "Sound: OFF";
+    Color soundColor = soundEnabled ? GREEN : RED;
+    DrawText(soundStatus, 620, 20, 20, soundColor);
 }
 
 // Menu Screen Unload logic

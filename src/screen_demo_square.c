@@ -50,7 +50,7 @@ void UpdateSquareDemoScreen(void)
     if (IsKeyPressed(KEY_ESCAPE))
     {
         finishScreen = 1;
-        PlaySound(fxCoin);
+        if (soundEnabled) PlaySound(fxCoin);
     }
 }
 

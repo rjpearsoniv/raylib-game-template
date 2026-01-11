@@ -50,6 +50,7 @@ extern GameScreen currentScreen;
 extern Font font;
 extern Music music;
 extern Sound fxCoin;
+extern bool soundEnabled;
 
 #ifdef __cplusplus
 extern "C" {            // Prevents name mangling of functions

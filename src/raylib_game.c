@@ -27,6 +27,7 @@ GameScreen currentScreen = LOGO;
 Font font = { 0 };
 Music music = { 0 };
 Sound fxCoin = { 0 };
+bool soundEnabled = true;
 
 //----------------------------------------------------------------------------------
 // Global Variables Definition (local to this module)
@@ -297,22 +298,34 @@ static void UpdateDrawFrame(void)
             case DEMO_CIRCLE:
             {
                 UpdateCircleDemoScreen();
-                if (FinishCircleDemoScreen()) TransitionToScreen(MENU);
+                if (FinishCircleDemoScreen())
+                {
+                    TransitionToScreen(MENU);
+                }
             } break;
             case DEMO_SQUARE:
             {
                 UpdateSquareDemoScreen();
-                if (FinishSquareDemoScreen()) TransitionToScreen(MENU);
+                if (FinishSquareDemoScreen())
+                {
+                    TransitionToScreen(MENU);
+                }
             } break;
             case DEMO_SPHERE:
             {
                 UpdateSphereDemoScreen();
-                if (FinishSphereDemoScreen()) TransitionToScreen(MENU);
+                if (FinishSphereDemoScreen())
+                {
+                    TransitionToScreen(MENU);
+                }
             } break;
             case DEMO_CUBE:
             {
                 UpdateCubeDemoScreen();
-                if (FinishCubeDemoScreen()) TransitionToScreen(MENU);
+                if (FinishCubeDemoScreen())
+                {
+                    TransitionToScreen(MENU);
+                }
             } break;
             // OLD SCREENS - COMMENTED OUT
             /*
