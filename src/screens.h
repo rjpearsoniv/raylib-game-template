@@ -29,7 +29,19 @@
 //----------------------------------------------------------------------------------
 // Types and Structures Definition
 //----------------------------------------------------------------------------------
-typedef enum GameScreen { UNKNOWN = -1, LOGO = 0, TITLE, OPTIONS, GAMEPLAY, ENDING } GameScreen;
+typedef enum GameScreen { 
+    UNKNOWN = -1, 
+    LOGO = 0, 
+    TITLE, 
+    OPTIONS, 
+    GAMEPLAY, 
+    ENDING, 
+    MENU,
+    DEMO_CIRCLE,
+    DEMO_SQUARE,
+    DEMO_SPHERE,
+    DEMO_CUBE
+} GameScreen;
 
 //----------------------------------------------------------------------------------
 // Global Variables Declaration (shared by several modules)
@@ -87,6 +99,42 @@ void UpdateEndingScreen(void);
 void DrawEndingScreen(void);
 void UnloadEndingScreen(void);
 int FinishEndingScreen(void);
+
+//----------------------------------------------------------------------------------
+// Menu Screen Functions Declaration
+//----------------------------------------------------------------------------------
+void InitMenuScreen(void);
+void UpdateMenuScreen(void);
+void DrawMenuScreen(void);
+void UnloadMenuScreen(void);
+int FinishMenuScreen(void);
+
+//----------------------------------------------------------------------------------
+// Demo Screens Functions Declaration
+//----------------------------------------------------------------------------------
+void InitCircleDemoScreen(void);
+void UpdateCircleDemoScreen(void);
+void DrawCircleDemoScreen(void);
+void UnloadCircleDemoScreen(void);
+int FinishCircleDemoScreen(void);
+
+void InitSquareDemoScreen(void);
+void UpdateSquareDemoScreen(void);
+void DrawSquareDemoScreen(void);
+void UnloadSquareDemoScreen(void);
+int FinishSquareDemoScreen(void);
+
+void InitSphereDemoScreen(void);
+void UpdateSphereDemoScreen(void);
+void DrawSphereDemoScreen(void);
+void UnloadSphereDemoScreen(void);
+int FinishSphereDemoScreen(void);
+
+void InitCubeDemoScreen(void);
+void UpdateCubeDemoScreen(void);
+void DrawCubeDemoScreen(void);
+void UnloadCubeDemoScreen(void);
+int FinishCubeDemoScreen(void);
 
 #ifdef __cplusplus
 }

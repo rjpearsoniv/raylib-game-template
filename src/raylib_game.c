@@ -98,6 +98,11 @@ int main(void)
         case OPTIONS: UnloadOptionsScreen(); break;
         case GAMEPLAY: UnloadGameplayScreen(); break;
         case ENDING: UnloadEndingScreen(); break;
+        case MENU: UnloadMenuScreen(); break;
+        case DEMO_CIRCLE: UnloadCircleDemoScreen(); break;
+        case DEMO_SQUARE: UnloadSquareDemoScreen(); break;
+        case DEMO_SPHERE: UnloadSphereDemoScreen(); break;
+        case DEMO_CUBE: UnloadCubeDemoScreen(); break;
         default: break;
     }
 
@@ -128,6 +133,11 @@ static void ChangeToScreen(int screen)
         case OPTIONS: UnloadOptionsScreen(); break;
         case GAMEPLAY: UnloadGameplayScreen(); break;
         case ENDING: UnloadEndingScreen(); break;
+        case MENU: UnloadMenuScreen(); break;
+        case DEMO_CIRCLE: UnloadCircleDemoScreen(); break;
+        case DEMO_SQUARE: UnloadSquareDemoScreen(); break;
+        case DEMO_SPHERE: UnloadSphereDemoScreen(); break;
+        case DEMO_CUBE: UnloadCubeDemoScreen(); break;
         default: break;
     }
 
@@ -139,6 +149,11 @@ static void ChangeToScreen(int screen)
         case OPTIONS: InitOptionsScreen(); break;
         case GAMEPLAY: InitGameplayScreen(); break;
         case ENDING: InitEndingScreen(); break;
+        case MENU: InitMenuScreen(); break;
+        case DEMO_CIRCLE: InitCircleDemoScreen(); break;
+        case DEMO_SQUARE: InitSquareDemoScreen(); break;
+        case DEMO_SPHERE: InitSphereDemoScreen(); break;
+        case DEMO_CUBE: InitCubeDemoScreen(); break;
         default: break;
     }
 
@@ -176,6 +191,11 @@ static void UpdateTransition(void)
                 case OPTIONS: UnloadOptionsScreen(); break;
                 case GAMEPLAY: UnloadGameplayScreen(); break;
                 case ENDING: UnloadEndingScreen(); break;
+                case MENU: UnloadMenuScreen(); break;
+                case DEMO_CIRCLE: UnloadCircleDemoScreen(); break;
+                case DEMO_SQUARE: UnloadSquareDemoScreen(); break;
+                case DEMO_SPHERE: UnloadSphereDemoScreen(); break;
+                case DEMO_CUBE: UnloadCubeDemoScreen(); break;
                 default: break;
             }
 
@@ -187,6 +207,11 @@ static void UpdateTransition(void)
                 case OPTIONS: InitOptionsScreen(); break;
                 case GAMEPLAY: InitGameplayScreen(); break;
                 case ENDING: InitEndingScreen(); break;
+                case MENU: InitMenuScreen(); break;
+                case DEMO_CIRCLE: InitCircleDemoScreen(); break;
+                case DEMO_SQUARE: InitSquareDemoScreen(); break;
+                case DEMO_SPHERE: InitSphereDemoScreen(); break;
+                case DEMO_CUBE: InitCubeDemoScreen(); break;
                 default: break;
             }
 
@@ -240,7 +265,7 @@ static void UpdateDrawFrame(void)
                 UpdateTitleScreen();
 
                 if (FinishTitleScreen() == 1) TransitionToScreen(OPTIONS);
-                else if (FinishTitleScreen() == 2) TransitionToScreen(GAMEPLAY);
+                else if (FinishTitleScreen() == 2) TransitionToScreen(MENU);
 
             } break;
             case OPTIONS:
@@ -249,6 +274,39 @@ static void UpdateDrawFrame(void)
 
                 if (FinishOptionsScreen()) TransitionToScreen(TITLE);
 
+            } break;
+            case MENU:
+            {
+                UpdateMenuScreen();
+
+                // Menu returns -1 to go back to title
+                if (FinishMenuScreen() == -1) TransitionToScreen(TITLE);
+                // Menu returns 1-4 for demo screens
+                else if (FinishMenuScreen() == 1) TransitionToScreen(DEMO_CIRCLE);
+                else if (FinishMenuScreen() == 2) TransitionToScreen(DEMO_SQUARE);
+                else if (FinishMenuScreen() == 3) TransitionToScreen(DEMO_SPHERE);
+                else if (FinishMenuScreen() == 4) TransitionToScreen(DEMO_CUBE);
+
+            } break;
+            case DEMO_CIRCLE:
+            {
+                UpdateCircleDemoScreen();
+                if (FinishCircleDemoScreen()) TransitionToScreen(MENU);
+            } break;
+            case DEMO_SQUARE:
+            {
+                UpdateSquareDemoScreen();
+                if (FinishSquareDemoScreen()) TransitionToScreen(MENU);
+            } break;
+            case DEMO_SPHERE:
+            {
+                UpdateSphereDemoScreen();
+                if (FinishSphereDemoScreen()) TransitionToScreen(MENU);
+            } break;
+            case DEMO_CUBE:
+            {
+                UpdateCubeDemoScreen();
+                if (FinishCubeDemoScreen()) TransitionToScreen(MENU);
             } break;
             case GAMEPLAY:
             {
@@ -284,6 +342,11 @@ static void UpdateDrawFrame(void)
             case OPTIONS: DrawOptionsScreen(); break;
             case GAMEPLAY: DrawGameplayScreen(); break;
             case ENDING: DrawEndingScreen(); break;
+            case MENU: DrawMenuScreen(); break;
+            case DEMO_CIRCLE: DrawCircleDemoScreen(); break;
+            case DEMO_SQUARE: DrawSquareDemoScreen(); break;
+            case DEMO_SPHERE: DrawSphereDemoScreen(); break;
+            case DEMO_CUBE: DrawCubeDemoScreen(); break;
             default: break;
         }
 

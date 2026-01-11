@@ -38,7 +38,12 @@ PROJECT_SOURCE_FILES  ?= \
     screen_title.c \
     screen_options.c \
     screen_gameplay.c \
-    screen_ending.c
+    screen_ending.c \
+    screen_menu.c \
+    screen_demo_circle.c \
+    screen_demo_square.c \
+    screen_demo_sphere.c \
+    screen_demo_cube.c
 
 # raylib library variables
 RAYLIB_SRC_PATH       ?= ../../raylib/src
