@@ -257,9 +257,11 @@ static void UpdateDrawFrame(void)
             {
                 UpdateLogoScreen();
 
-                if (FinishLogoScreen()) TransitionToScreen(TITLE);
+                if (FinishLogoScreen()) TransitionToScreen(MENU);
 
             } break;
+            // OLD SCREENS - COMMENTED OUT
+            /*
             case TITLE:
             {
                 UpdateTitleScreen();
@@ -275,17 +277,21 @@ static void UpdateDrawFrame(void)
                 if (FinishOptionsScreen()) TransitionToScreen(TITLE);
 
             } break;
+            */
             case MENU:
             {
                 UpdateMenuScreen();
 
-                // Menu returns -1 to go back to title
-                if (FinishMenuScreen() == -1) TransitionToScreen(TITLE);
-                // Menu returns 1-4 for demo screens
-                else if (FinishMenuScreen() == 1) TransitionToScreen(DEMO_CIRCLE);
+                // Menu returns 1-4 for demo screens, 5 for quit
+                if (FinishMenuScreen() == 1) TransitionToScreen(DEMO_CIRCLE);
                 else if (FinishMenuScreen() == 2) TransitionToScreen(DEMO_SQUARE);
                 else if (FinishMenuScreen() == 3) TransitionToScreen(DEMO_SPHERE);
                 else if (FinishMenuScreen() == 4) TransitionToScreen(DEMO_CUBE);
+                else if (FinishMenuScreen() == 5)
+                {
+                    // Quit selected - close window
+                    CloseWindow();
+                }
 
             } break;
             case DEMO_CIRCLE:
@@ -308,6 +314,8 @@ static void UpdateDrawFrame(void)
                 UpdateCubeDemoScreen();
                 if (FinishCubeDemoScreen()) TransitionToScreen(MENU);
             } break;
+            // OLD SCREENS - COMMENTED OUT
+            /*
             case GAMEPLAY:
             {
                 UpdateGameplayScreen();
@@ -323,6 +331,7 @@ static void UpdateDrawFrame(void)
                 if (FinishEndingScreen() == 1) TransitionToScreen(TITLE);
 
             } break;
+            */
             default: break;
         }
     }
@@ -338,10 +347,11 @@ static void UpdateDrawFrame(void)
         switch(currentScreen)
         {
             case LOGO: DrawLogoScreen(); break;
-            case TITLE: DrawTitleScreen(); break;
-            case OPTIONS: DrawOptionsScreen(); break;
-            case GAMEPLAY: DrawGameplayScreen(); break;
-            case ENDING: DrawEndingScreen(); break;
+            // OLD SCREENS - COMMENTED OUT
+            // case TITLE: DrawTitleScreen(); break;
+            // case OPTIONS: DrawOptionsScreen(); break;
+            // case GAMEPLAY: DrawGameplayScreen(); break;
+            // case ENDING: DrawEndingScreen(); break;
             case MENU: DrawMenuScreen(); break;
             case DEMO_CIRCLE: DrawCircleDemoScreen(); break;
             case DEMO_SQUARE: DrawSquareDemoScreen(); break;

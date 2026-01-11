@@ -21,6 +21,7 @@ typedef enum {
     MENU_DRAW_SQUARE,
     MENU_DRAW_SPHERE,
     MENU_DRAW_CUBE,
+    MENU_QUIT,
     MENU_ITEM_COUNT
 } MenuItem;
 
@@ -30,7 +31,8 @@ static const char* menuText[] = {
     "Draw Circle",
     "Draw Square",
     "Draw Sphere",
-    "Draw Cube"
+    "Draw Cube",
+    "Quit"
 };
 
 //----------------------------------------------------------------------------------
@@ -67,15 +69,8 @@ void UpdateMenuScreen(void)
     if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE))
     {
         // Return different values based on selected item
-        // These will map to demo screens we'll create
+        // 1-4 map to demo screens, 5 is quit
         finishScreen = selectedItem + 1;
-        PlaySound(fxCoin);
-    }
-    
-    // Press ESC to go back to title screen
-    if (IsKeyPressed(KEY_ESCAPE))
-    {
-        finishScreen = -1;  // Back to title
         PlaySound(fxCoin);
     }
 }
@@ -116,7 +111,7 @@ void DrawMenuScreen(void)
     }
     
     // Draw instructions
-    DrawText("UP/DOWN: Navigate | ENTER/SPACE: Select | ESC: Back", 50, 400, 20, DARKGRAY);
+    DrawText("UP/DOWN: Navigate | ENTER/SPACE: Select", 50, 400, 20, DARKGRAY);
 }
 
 // Menu Screen Unload logic
