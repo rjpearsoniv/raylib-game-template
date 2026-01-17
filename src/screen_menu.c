@@ -23,6 +23,7 @@ typedef enum {
     MENU_DRAW_CUBE,
     MENU_PONG,
     MENU_GRAVITY,
+    MENU_KINEMATICS,
     MENU_QUIT,
     MENU_ITEM_COUNT
 } MenuItem;
@@ -36,6 +37,7 @@ static const char* menuText[] = {
     "Draw Cube",
     "Pong Game",
     "Gravity Simulation",
+    "Kinematics Demo",
     "Quit"
 };
 
@@ -92,12 +94,12 @@ void DrawMenuScreen(void)
     ClearBackground(RAYWHITE);
     
     // Draw title
-    Vector2 titlePos = { 20, 20 };
+    Vector2 titlePos = { 40, 40 };
     DrawTextEx(font, "RAYLIB MENU", titlePos, font.baseSize * 3.0f, 4, DARKBLUE);
     
-    // Draw menu items
-    int startY = 120;
-    int itemHeight = 60;
+    // Draw menu items - adjust for larger screen
+    int startY = 180;
+    int itemHeight = 70;
     
     for (int i = 0; i < MENU_ITEM_COUNT; i++)
     {
@@ -107,27 +109,27 @@ void DrawMenuScreen(void)
         // Draw selection background
         if (i == selectedItem)
         {
-            DrawRectangle(50, startY + i * itemHeight - 5, 700, 50, bgColor);
+            DrawRectangle(80, startY + i * itemHeight - 10, 1400, 60, bgColor);
         }
         
         // Draw menu text
-        Vector2 textPos = { 70, (float)(startY + i * itemHeight) };
+        Vector2 textPos = { 120, (float)(startY + i * itemHeight) };
         DrawTextEx(font, menuText[i], textPos, font.baseSize * 2.0f, 2, textColor);
         
         // Draw selection indicator
         if (i == selectedItem)
         {
-            DrawText(">", 30, startY + i * itemHeight, 40, ORANGE);
+            DrawText(">", 50, startY + i * itemHeight, 50, ORANGE);
         }
     }
     
-    // Draw instructions
-    DrawText("UP/DOWN: Navigate | ENTER/SPACE: Select | S: Toggle Sound", 20, 380, 18, DARKGRAY);
+    // Draw instructions - moved to bottom
+    DrawText("UP/DOWN: Navigate | ENTER/SPACE: Select | S: Toggle Sound", 40, 830, 22, DARKGRAY);
     
     // Draw sound status
     const char* soundStatus = soundEnabled ? "Sound: ON" : "Sound: OFF";
     Color soundColor = soundEnabled ? GREEN : RED;
-    DrawText(soundStatus, 620, 20, 20, soundColor);
+    DrawText(soundStatus, 1380, 40, 24, soundColor);
 }
 
 // Menu Screen Unload logic

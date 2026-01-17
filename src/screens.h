@@ -42,7 +42,8 @@ typedef enum GameScreen {
     DEMO_SPHERE,
     DEMO_CUBE,
     DEMO_PONG,
-    DEMO_GRAVITY
+    DEMO_GRAVITY,
+    DEMO_KINEMATICS
 } GameScreen;
 
 //----------------------------------------------------------------------------------
@@ -150,6 +151,12 @@ void UpdateGravityScreen(void);
 void DrawGravityScreen(void);
 void UnloadGravityScreen(void);
 int FinishGravityScreen(void);
+
+void InitKinematicsScreen(void);
+void UpdateKinematicsScreen(void);
+void DrawKinematicsScreen(void);
+void UnloadKinematicsScreen(void);
+int FinishKinematicsScreen(void);
 
 #ifdef __cplusplus
 }

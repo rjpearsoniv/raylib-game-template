@@ -45,7 +45,19 @@ PROJECT_SOURCE_FILES  ?= \
     screen_demo_sphere.c \
     screen_demo_cube.c \
     screen_pong.cpp \
-    screen_gravity.cpp
+    screen_gravity.cpp \
+    screen_kinematics.cpp \
+    kinematics_App.cpp \
+    kinematics/Simulation.cpp \
+    kinematics/VectorOfStructSim.cpp \
+    kinematics/StructOfVectorSim.cpp \
+    kinematics/OmpSimdSim.cpp \
+    kinematics/OmpForSim.cpp \
+    kinematics/StructOfPointerSim.cpp \
+    kinematics/StructOfAlignedSim.cpp \
+    kinematics/StructOfOversizedSim.cpp \
+    kinematics/StructOfArraySim.cpp \
+    kinematics/ShaderSim.cpp
 
 # raylib library variables
 RAYLIB_SRC_PATH       ?= ../../raylib/src
@@ -200,6 +212,9 @@ endif
 CFLAGS = -Wall -D_DEFAULT_SOURCE -Wno-missing-braces -Wno-unused-value -Wno-pointer-sign $(PROJECT_CUSTOM_FLAGS)
 #CFLAGS += -Wextra -Wmissing-prototypes -Wstrict-prototypes
 
+# Define C++ compiler flags: CXXFLAGS
+CXXFLAGS = -Wall -D_DEFAULT_SOURCE -Wno-missing-braces -Wno-unused-value -std=c++20 $(PROJECT_CUSTOM_FLAGS)
+
 ifeq ($(PLATFORM),PLATFORM_WEB)
     CFLAGS += -std=gnu99
 else
@@ -208,18 +223,23 @@ endif
 
 ifeq ($(BUILD_MODE),DEBUG)
     CFLAGS += -g -D_DEBUG
+    CXXFLAGS += -g -D_DEBUG
 else
     ifeq ($(PLATFORM),PLATFORM_WEB)
         ifeq ($(BUILD_WEB_ASYNCIFY),TRUE)
             CFLAGS += -O3
+            CXXFLAGS += -O3
         else
             CFLAGS += -Os
+            CXXFLAGS += -Os
         endif
     else
         ifeq ($(PLATFORM_OS),OSX)
             CFLAGS += -O2
+            CXXFLAGS += -O2
         else
             CFLAGS += -s -O2
+            CXXFLAGS += -s -O2
         endif
     endif
 endif
@@ -229,7 +249,7 @@ endif
 
 # Define include paths for required headers: INCLUDE_PATHS
 #------------------------------------------------------------------------------------------------
-INCLUDE_PATHS += -I. -Iexternal -I$(RAYLIB_INCLUDE_PATH)
+INCLUDE_PATHS += -I. -Iexternal -I$(RAYLIB_INCLUDE_PATH) -Ikinematics/include
 
 # Define additional directories containing required header files
 ifeq ($(PLATFORM),PLATFORM_DRM)
@@ -399,7 +419,7 @@ $(PROJECT_NAME): $(OBJS)
 	$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDE_PATHS) -D$(PLATFORM)
 
 %.o: %.cpp
-	$(CXX) -c $< -o $@ $(CFLAGS) $(INCLUDE_PATHS) -D$(PLATFORM)
+	$(CXX) -c $< -o $@ $(CXXFLAGS) $(INCLUDE_PATHS) -D$(PLATFORM)
 
 .PHONY: clean_shell_cmd clean_shell_sh
 

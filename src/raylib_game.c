@@ -32,8 +32,8 @@ bool soundEnabled = true;
 //----------------------------------------------------------------------------------
 // Global Variables Definition (local to this module)
 //----------------------------------------------------------------------------------
-static const int screenWidth = 800;
-static const int screenHeight = 450;
+static const int screenWidth = 1600;
+static const int screenHeight = 900;
 
 // Required variables to manage screen transitions (fade-in, fade-out)
 static float transAlpha = 0.0f;
@@ -144,6 +144,7 @@ static void ChangeToScreen(int screen)
         case DEMO_CUBE: UnloadCubeDemoScreen(); break;
         case DEMO_PONG: UnloadPongScreen(); break;
         case DEMO_GRAVITY: UnloadGravityScreen(); break;
+        case DEMO_KINEMATICS: UnloadKinematicsScreen(); break;
         default: break;
     }
 
@@ -162,6 +163,7 @@ static void ChangeToScreen(int screen)
         case DEMO_CUBE: InitCubeDemoScreen(); break;
         case DEMO_PONG: InitPongScreen(); break;
         case DEMO_GRAVITY: InitGravityScreen(); break;
+        case DEMO_KINEMATICS: InitKinematicsScreen(); break;
         default: break;
     }
 
@@ -206,6 +208,7 @@ static void UpdateTransition(void)
                 case DEMO_CUBE: UnloadCubeDemoScreen(); break;
                 case DEMO_PONG: UnloadPongScreen(); break;
                 case DEMO_GRAVITY: UnloadGravityScreen(); break;
+                case DEMO_KINEMATICS: UnloadKinematicsScreen(); break;
                 default: break;
             }
 
@@ -224,6 +227,7 @@ static void UpdateTransition(void)
                 case DEMO_CUBE: InitCubeDemoScreen(); break;
                 case DEMO_PONG: InitPongScreen(); break;
                 case DEMO_GRAVITY: InitGravityScreen(); break;
+                case DEMO_KINEMATICS: InitKinematicsScreen(); break;
                 default: break;
             }
 
@@ -294,14 +298,15 @@ static void UpdateDrawFrame(void)
             {
                 UpdateMenuScreen();
 
-                // Menu returns 1-4 for demo screens, 5 for pong, 6 for gravity, 7 for quit
+                // Menu returns 1-4 for demo screens, 5 for pong, 6 for gravity, 7 for kinematics, 8 for quit
                 if (FinishMenuScreen() == 1) TransitionToScreen(DEMO_CIRCLE);
                 else if (FinishMenuScreen() == 2) TransitionToScreen(DEMO_SQUARE);
                 else if (FinishMenuScreen() == 3) TransitionToScreen(DEMO_SPHERE);
                 else if (FinishMenuScreen() == 4) TransitionToScreen(DEMO_CUBE);
                 else if (FinishMenuScreen() == 5) TransitionToScreen(DEMO_PONG);
                 else if (FinishMenuScreen() == 6) TransitionToScreen(DEMO_GRAVITY);
-                else if (FinishMenuScreen() == 7)
+                else if (FinishMenuScreen() == 7) TransitionToScreen(DEMO_KINEMATICS);
+                else if (FinishMenuScreen() == 8)
                 {
                     // Quit selected - close window
                     CloseWindow();
@@ -356,6 +361,14 @@ static void UpdateDrawFrame(void)
                     TransitionToScreen(MENU);
                 }
             } break;
+            case DEMO_KINEMATICS:
+            {
+                UpdateKinematicsScreen();
+                if (FinishKinematicsScreen())
+                {
+                    TransitionToScreen(MENU);
+                }
+            } break;
             // OLD SCREENS - COMMENTED OUT
             /*
             case GAMEPLAY:
@@ -401,6 +414,7 @@ static void UpdateDrawFrame(void)
             case DEMO_CUBE: DrawCubeDemoScreen(); break;
             case DEMO_PONG: DrawPongScreen(); break;
             case DEMO_GRAVITY: DrawGravityScreen(); break;
+            case DEMO_KINEMATICS: DrawKinematicsScreen(); break;
             default: break;
         }
 
