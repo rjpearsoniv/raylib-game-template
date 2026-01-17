@@ -44,7 +44,8 @@ PROJECT_SOURCE_FILES  ?= \
     screen_demo_square.c \
     screen_demo_sphere.c \
     screen_demo_cube.c \
-    screen_pong.cpp
+    screen_pong.cpp \
+    screen_gravity.cpp
 
 # raylib library variables
 RAYLIB_SRC_PATH       ?= ../../raylib/src
@@ -148,6 +149,7 @@ endif
 # Define default C compiler: CC
 #------------------------------------------------------------------------------------------------
 CC = gcc
+CXX = g++
 
 ifeq ($(PLATFORM),PLATFORM_DESKTOP)
     ifeq ($(PLATFORM_OS),OSX)
@@ -360,7 +362,16 @@ endif
 
 # Define all object files from source files
 #------------------------------------------------------------------------------------------------
-OBJS = $(patsubst %.c, %.o, $(PROJECT_SOURCE_FILES))
+OBJS = $(patsubst %.c, %.o, $(filter %.c, $(PROJECT_SOURCE_FILES)))
+OBJS += $(patsubst %.cpp, %.o, $(filter %.cpp, $(PROJECT_SOURCE_FILES)))
+
+# Determine if we have C++ files to use appropriate linker
+HAS_CPP_FILES = $(filter %.cpp, $(PROJECT_SOURCE_FILES))
+ifneq ($(HAS_CPP_FILES),)
+    LINKER = $(CXX)
+else
+    LINKER = $(CC)
+endif
 
 # Define processes to execute
 #------------------------------------------------------------------------------------------------
@@ -380,12 +391,15 @@ all:
 
 # Project target defined by PROJECT_NAME
 $(PROJECT_NAME): $(OBJS)
-	$(CC) -o $(PROJECT_BUILD_PATH)/$(PROJECT_NAME)$(EXT) $(OBJS) $(CFLAGS) $(INCLUDE_PATHS) $(LDFLAGS) $(LDLIBS) -D$(PLATFORM)
+	$(LINKER) -o $(PROJECT_BUILD_PATH)/$(PROJECT_NAME)$(EXT) $(OBJS) $(CFLAGS) $(INCLUDE_PATHS) $(LDFLAGS) $(LDLIBS) -D$(PLATFORM)
 
 # Compile source files
 # NOTE: This pattern will compile every module defined on $(OBJS)
 %.o: %.c
 	$(CC) -c $< -o $@ $(CFLAGS) $(INCLUDE_PATHS) -D$(PLATFORM)
+
+%.o: %.cpp
+	$(CXX) -c $< -o $@ $(CFLAGS) $(INCLUDE_PATHS) -D$(PLATFORM)
 
 .PHONY: clean_shell_cmd clean_shell_sh
 

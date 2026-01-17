@@ -22,6 +22,7 @@ typedef enum {
     MENU_DRAW_SPHERE,
     MENU_DRAW_CUBE,
     MENU_PONG,
+    MENU_GRAVITY,
     MENU_QUIT,
     MENU_ITEM_COUNT
 } MenuItem;
@@ -34,6 +35,7 @@ static const char* menuText[] = {
     "Draw Sphere",
     "Draw Cube",
     "Pong Game",
+    "Gravity Simulation",
     "Quit"
 };
 

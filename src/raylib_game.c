@@ -143,6 +143,7 @@ static void ChangeToScreen(int screen)
         case DEMO_SPHERE: UnloadSphereDemoScreen(); break;
         case DEMO_CUBE: UnloadCubeDemoScreen(); break;
         case DEMO_PONG: UnloadPongScreen(); break;
+        case DEMO_GRAVITY: UnloadGravityScreen(); break;
         default: break;
     }
 
@@ -160,6 +161,7 @@ static void ChangeToScreen(int screen)
         case DEMO_SPHERE: InitSphereDemoScreen(); break;
         case DEMO_CUBE: InitCubeDemoScreen(); break;
         case DEMO_PONG: InitPongScreen(); break;
+        case DEMO_GRAVITY: InitGravityScreen(); break;
         default: break;
     }
 
@@ -203,6 +205,7 @@ static void UpdateTransition(void)
                 case DEMO_SPHERE: UnloadSphereDemoScreen(); break;
                 case DEMO_CUBE: UnloadCubeDemoScreen(); break;
                 case DEMO_PONG: UnloadPongScreen(); break;
+                case DEMO_GRAVITY: UnloadGravityScreen(); break;
                 default: break;
             }
 
@@ -220,6 +223,7 @@ static void UpdateTransition(void)
                 case DEMO_SPHERE: InitSphereDemoScreen(); break;
                 case DEMO_CUBE: InitCubeDemoScreen(); break;
                 case DEMO_PONG: InitPongScreen(); break;
+                case DEMO_GRAVITY: InitGravityScreen(); break;
                 default: break;
             }
 
@@ -290,13 +294,14 @@ static void UpdateDrawFrame(void)
             {
                 UpdateMenuScreen();
 
-                // Menu returns 1-4 for demo screens, 5 for pong, 6 for quit
+                // Menu returns 1-4 for demo screens, 5 for pong, 6 for gravity, 7 for quit
                 if (FinishMenuScreen() == 1) TransitionToScreen(DEMO_CIRCLE);
                 else if (FinishMenuScreen() == 2) TransitionToScreen(DEMO_SQUARE);
                 else if (FinishMenuScreen() == 3) TransitionToScreen(DEMO_SPHERE);
                 else if (FinishMenuScreen() == 4) TransitionToScreen(DEMO_CUBE);
                 else if (FinishMenuScreen() == 5) TransitionToScreen(DEMO_PONG);
-                else if (FinishMenuScreen() == 6)
+                else if (FinishMenuScreen() == 6) TransitionToScreen(DEMO_GRAVITY);
+                else if (FinishMenuScreen() == 7)
                 {
                     // Quit selected - close window
                     CloseWindow();
@@ -339,6 +344,14 @@ static void UpdateDrawFrame(void)
             {
                 UpdatePongScreen();
                 if (FinishPongScreen())
+                {
+                    TransitionToScreen(MENU);
+                }
+            } break;
+            case DEMO_GRAVITY:
+            {
+                UpdateGravityScreen();
+                if (FinishGravityScreen())
                 {
                     TransitionToScreen(MENU);
                 }
@@ -387,6 +400,7 @@ static void UpdateDrawFrame(void)
             case DEMO_SPHERE: DrawSphereDemoScreen(); break;
             case DEMO_CUBE: DrawCubeDemoScreen(); break;
             case DEMO_PONG: DrawPongScreen(); break;
+            case DEMO_GRAVITY: DrawGravityScreen(); break;
             default: break;
         }
 
